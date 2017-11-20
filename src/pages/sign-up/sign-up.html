@@ -1,0 +1,45 @@
+<ion-content>
+    <div class="a1-content-center a-login-form">
+        <div class="form-title" text-center>
+            <span>Đăng ký</span>
+        </div>
+        <div style="height: 20px"></div>
+
+        <div class="a-input-form" text-center>
+            <ion-item>
+                <ion-input type="email" [(ngModel)]="user.email" (input)="inputEmail()" required placeholder="Email"></ion-input>
+            </ion-item>
+
+            <p ion-text [hidden]="submitEmail === false" color="danger">
+                Hãy nhập email vào ô trống
+            </p>
+
+            <div style="height: 20px"></div>
+
+            <ion-item>
+                <ion-input type="password" [(ngModel)]="user.password" (input)="inputPassword()" required placeholder="Password"></ion-input>
+            </ion-item>
+
+            <p ion-text [hidden]="submitPassword === false" color="danger">
+                Hãy nhập password vào ô trống
+            </p>
+            <div style="height: 20px"></div>
+            <ion-item>
+                <ion-input type="tel" [(ngModel)]="user.phoneNumber" maxlength="11" (input)="inputPhone()" required placeholder="Phone number"></ion-input>
+            </ion-item>
+            <p ion-text [hidden]="submitPhone === false" color="danger">
+                Hãy nhập số điện thoại vào ô trống
+            </p>
+
+            <div style="height: 20px"></div>
+            <ion-item>
+                <ion-input type="text" [(ngModel)]="user.displayName" (input)="inputName()" required placeholder="Full name"></ion-input>
+            </ion-item>
+            <p ion-text [hidden]="submitName === false" color="danger">
+                Hãy nhập họ tên của bạn
+            </p>
+            <div style="height: 20px"></div>
+            <button ion-button block (click)="signup()">Đăng ký</button>
+        </div>
+    </div>
+</ion-content>

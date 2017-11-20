@@ -1,0 +1,62 @@
+page-add-car {
+    ion-content {
+        background: linear-gradient(to right, #00d2ff, #928DAB);
+    }
+    ion-input {
+        text-align: center;
+        border-bottom: 1px solid #10d4c2;
+    }
+    .a-car-form {
+        width: 80%;
+        margin: auto;
+    }
+    .car {
+        transition: .2s;
+        filter: brightness(100%);
+        transform: scale(1);
+    }
+    .car:active {
+        filter: brightness(120%);
+        transform: scale(.96);
+    }
+    .car-img {
+        img {
+            max-width: 50%;
+            filter: grayscale(80%);
+        }
+    }
+    .car-active {
+        filter: grayscale(0%)!important;
+        color: #49ace3;
+    }
+    .a-seat {
+        background: whitesmoke;
+        // border-top: 1px solid #dcdcdc;
+        // border-bottom: 1px solid #dcdcdc;
+        padding: 15px;
+        span {
+            text-align: center;
+            font-size: 6vw;
+            color: #185a9d;
+        }
+    }
+    .button-add {
+        padding: 6px;
+        border-radius: 20px;
+        width: 40%;
+        margin: auto;
+        transition: .2s;
+        transform: scale(1);
+        filter: brightness(100%);
+        background: #185a9d;
+        span {
+            color: white;
+            font-size: 5vw;
+            text-transform: uppercase;
+        }
+    }
+    .button-add {
+        transform: scale(.96);
+        filter: brightness(120%);
+    }
+}

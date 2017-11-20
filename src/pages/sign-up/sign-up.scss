@@ -1,0 +1,22 @@
+page-sign-up {
+    ion-content {
+        background-image: url("../assets/ipark/image/background_3.jpg");
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+    }
+    .a-login-form {
+        width: 80%;
+        .a-input-form {
+            background: rgba($color: black, $alpha: .2);
+            border-radius: 10px;
+        }
+        .form-title {
+            span {
+                color: white;
+                font-size: 8vw;
+                font-weight: bold;
+            }
+        }
+    }
+}

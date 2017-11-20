@@ -1,0 +1,72 @@
+page-park-detail {
+    ion-content {
+        background: whitesmoke;
+    }
+    #parkMapID {
+        height: 30%;
+        width: 100%;
+        background-image: url("../assets/ipark/image/map.png");
+        background-position: center;
+        background-size: cover;
+        background-repeat: no-repeat;
+    }
+    #starIcon {
+        color: #d9d9d9;
+    }
+    .starActive {
+        color: #ffff1a!important;
+    }
+    .a-detail-listHeader {
+        padding: 5px;
+        .a-detail-parkName {
+            padding-left: 5px;
+            span {
+                text-transform: uppercase;
+                font-weight: bold;
+                font-size: 5vw;
+            }
+        }
+    }
+    .a-detail-parkRate {
+        padding-left: 5px;
+        span {
+            font-size: 5vw;
+        }
+        ion-icon {
+            font-size: 4.5vw;
+        }
+    }
+    .a-list-detail {
+        ion-icon {
+            color: #43cea2;
+        }
+    }
+    .a-detail-social {
+        padding: 5px;
+        .a3-item {
+            ion-icon {
+                color: #43cea2;
+                font-size: 8vw;
+            }
+        }
+        border-bottom: 1px solid #dcdcdc;
+    }
+    .a-btn-bottom {
+        position: absolute;
+        left: 10px;
+        right: 10px;
+        bottom: 10px;
+        filter: brightness(100%);
+        transform: scale(1);
+        transition: .2s;
+        span {
+            font-size: 5vw;
+            text-transform: uppercase;
+            color: white;
+        }
+    }
+    .a-btn-bottom:active {
+        filter: brightness(120%);
+        transform: scale(.96);
+    }
+}

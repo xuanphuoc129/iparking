@@ -1,0 +1,33 @@
+<ion-content>
+    <div class="a1-width-80 a1-content-center a1-width-80" style="background: white; box-shadow: 0px 1px 2px #dcdcdc" text-center>
+        <div class="a3-container-center a-background-header" padding>
+            <span style="color: white;font-size: 5vw;">Thêm xe</span>
+        </div>
+        <div class="a-car-form a3-container a3-items-center a1-relative">
+            <div class="a1-width-30">
+                <ion-input type="tel" placeholder="30A1" maxlength="4" text-center (input)="change()" #input1></ion-input>
+            </div>
+            <div class="a1-width-10 " text-center><span>-</span></div>
+            <ion-input type="tel" placeholder="12345" maxlength="5" text-center #input2></ion-input>
+        </div>
+        <div margin-top class="car-img a3-container-center">
+            <div class="a1-width-50 a3-container a3-column a3-items-center car" (click)="active()">
+                <img src="assets/ipark/icon/ic_booking_car.png" [class.car-active]="isActive">
+                <div style="margin-top: 5px"><span [class.car-active]="isActive">Xe con/Xe khách</span></div>
+            </div>
+            <div class="a1-width-50 a3-container a3-column a3-items-center car" (click)="active()">
+                <img src="assets/ipark/icon/car_2.png" [class.car-active]="!isActive">
+                <div style="margin-top: 5px"><span [class.car-active]="!isActive">Xe tải/Bán tải</span></div>
+            </div>
+        </div>
+        <div style="height: 10px"></div>
+        <div class="a-seat" id="seat" (click)="showRadio()">
+            <span>{{testRadioResult}} chỗ</span>
+        </div>
+        <div style="height: 10px"></div>
+        <div class="button-add" (click)="closeView()">
+            <span>Thêm</span>
+        </div>
+        <div style="height: 10px"></div>
+    </div>
+</ion-content>

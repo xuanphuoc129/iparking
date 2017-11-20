@@ -1,0 +1,43 @@
+page-well-come {
+    .a-slide-container {
+        height: 80%;
+        width: 100%;
+    }
+    .swiper-slide img {
+        max-width: 60%;
+    }
+    .text-top {
+        position: absolute;
+        top: 16%;
+        left: 20px;
+        right: 20px;
+        span {
+            font-size: 8vw;
+        }
+    }
+    .btn-bottom-container {
+        position: absolute;
+        bottom: 10px;
+        left: 0;
+        width: 100%;
+        .w-btn {
+            margin-left: 16px;
+            text-align: center;
+            width: 50%;
+            border: 2px solid #2183b1;
+            border-radius: 5px;
+            padding: 10px;
+            transition: .2s;
+            transform: scale(1);
+            filter: brightness(100%);
+            span {
+                text-transform: uppercase;
+                font-size: 4.5vw;
+            }
+        }
+        .w-btn:active {
+            transform: scale(.96);
+            filter: brightness(120%);
+        }
+    }
+}

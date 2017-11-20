@@ -1,0 +1,22 @@
+<ion-menu [content]="mycontent">
+    <ion-header>
+        <div class="a3-container a3-items-center a3-justify-center a-background-header" padding>
+            <div class="a-ipark-logo a1-width-30">
+                <img src="assets/ipark/image/logo.png" alt="">
+            </div>
+            <div class="a-ipark-appName a1-width-70" text-left>
+                <span>iParking</span>
+            </div>
+        </div>
+    </ion-header>
+    <ion-content>
+        <ion-list>
+            <ion-item menuClose *ngFor="let item of menuItems" (click)="openPage(item)">
+                <ion-icon item-start name="{{item.icon}}" style="color: #148273"></ion-icon>
+                <ion-label>{{item.name}}</ion-label>
+            </ion-item>
+        </ion-list>
+    </ion-content>
+</ion-menu>
+
+<ion-nav #mycontent [root]="rootPage"></ion-nav>

@@ -1,0 +1,35 @@
+<ion-header>
+    <ion-navbar>
+        <button ion-button menuToggle><ion-icon name="menu"></ion-icon></button>
+        <ion-title text-center>Home</ion-title>
+        <ion-buttons end>
+            <button ion-button icon-only (click)="showSearchBar()">
+                <ion-icon name="search"></ion-icon>
+            </button>
+        </ion-buttons>
+        <ion-buttons end>
+            <button ion-button icon-only (click)="goToLocation()">
+                <ion-icon name="ios-locate-outline"></ion-icon>
+            </button>
+        </ion-buttons>
+    </ion-navbar>
+
+</ion-header>
+
+<ion-content>
+    <div id="map"></div>
+    <div #divSearch class="a1-container-top animated slideInDown divSearch" [hidden]="isShowSearchBar===false">
+        <ion-searchbar #searchbar></ion-searchbar>
+    </div>
+    <div class="a1-container-bottom" [hidden]="isShowSearchBar===true">
+        <div class="a1-relative" style="padding: 10px">
+            <div class="a-home-info-Location">
+                <span>{{infoLocation}}</span>
+            </div>
+            <div style="height: 10px;"></div>
+            <div class="a3-container-center a-home-find a-background-header" (click)="goToSearchPage()">
+                <span>Tìm kiếm gần đây</span>
+            </div>
+        </div>
+    </div>
+</ion-content>

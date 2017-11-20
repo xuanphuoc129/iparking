@@ -1,0 +1,57 @@
+<!--
+  Generated template for the ParkDetailPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+    <div class="a3-container a3-justify-between a3-items-center a-background-header a-park-header-height">
+        <div class="btn-back" text-center (click)="closeView()">
+            <img src="assets/ipark/icon/btn_back.png" alt="">
+        </div>
+        <div class="a-park-header-title">
+            <span>Điểm đỗ {{park.parkID}}</span>
+        </div>
+        <div class="btn_favorite" text-center (click)="activeStar()">
+            <img src="assets/ipark/icon/star.png" [hidden]="isActiveStar">
+            <img src="assets/ipark/icon/star_1.png" [hidden]="!isActiveStar">
+        </div>
+    </div>
+</ion-header>
+<ion-content>
+    <div id="parkMapID"></div>
+    <div>
+        <div class="a-detail-listHeader ">
+            <div class="a-detail-parkName"><span>{{park.parkName}}</span></div>
+            <div class="a-detail-parkRate">
+                <span>{{park.rate}}</span>
+                <span>
+                    <ion-icon name="star"></ion-icon>
+                    <ion-icon name="star"></ion-icon>
+                    <ion-icon name="star"></ion-icon>
+                    <ion-icon name="star"></ion-icon>
+                    <ion-icon name="star"></ion-icon>
+                </span>
+            </div>
+        </div>
+        <div class="a-detail-social a3-container a-">
+            <div class="a3-container a3-column a3-items-center a3-item">
+                <ion-icon name="bookmark"></ion-icon>
+                <span>Lưu</span>
+            </div>
+            <div margin-left class="a3-container a3-column  a3-items-center a3-item">
+                <ion-icon name="share"></ion-icon>
+                <span>Chia sẻ</span>
+            </div>
+        </div>
+        <ion-list style="margin-top: 5px">
+            <ion-item *ngFor="let item of listItems" class="a-list-detail">
+                <ion-icon item-start name="{{item.icon}}"></ion-icon>
+                <ion-label>{{item.name}}</ion-label>
+            </ion-item>
+        </ion-list>
+    </div>
+    <div class="a-background-header a-btn-bottom " text-center padding (click)="goToSign()">
+        <span>Đăng ký dịch vụ</span>
+    </div>
+</ion-content>

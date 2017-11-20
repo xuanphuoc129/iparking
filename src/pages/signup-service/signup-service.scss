@@ -1,0 +1,148 @@
+page-signup-service {
+    ion-slide {
+        img {
+            height: 250px!important;
+        }
+    }
+    .a-park-header-title {}
+    // .scroll-content {
+    //     display: flex;
+    //     display: -webkit-flex;
+    //     align-items: center;
+    //     -webkit-align-items: center;
+    //     justify-content: center;
+    //     -webkit-justify-content: center;
+    // }
+    .a-sign-top {
+        .a-sign-icon {
+            img {
+                max-width: 64px;
+                max-height: 64px;
+            }
+        }
+        .a-sign-name {
+            span {
+                font-size: 5vw;
+            }
+        }
+    }
+    .a-park-status {
+        margin: auto;
+        width: calc(100% - 20px);
+        border-radius: 5px;
+        padding: 10px;
+        background: whitesmoke;
+        box-shadow: 0px 1px 5px #888888;
+        .a-park-address {
+            span {
+                font-weight: bold;
+                font-size: 5vw;
+                text-transform: uppercase;
+            }
+        }
+    }
+    .a-sign-form {
+        width: 100%;
+        .a-item-label {
+            width: 30%;
+            transition: .2s;
+            filter: brightness(100%);
+            transform: scale(1);
+            img {
+                max-width: 32%;
+                transition: .2s;
+                filter: brightness(100%);
+                transform: scale(1);
+            }
+        }
+        .a-item-label:active {
+            img {
+                filter: brightness(120%);
+                transform: scale(.96);
+            }
+        }
+        .a-item-name {
+            width: 40%;
+            height: 100%;
+            text-align: center;
+            span {
+                color: #5297EB;
+                font-weight: bold;
+                font-size: 5vw;
+                text-transform: uppercase;
+            }
+        }
+        .a-btn-add {
+            width: 30%;
+            img {
+                max-width: 32%;
+                transition: .2s;
+                filter: brightness(100%);
+                transform: scale(1);
+            }
+        }
+        .a-btn-add:active {
+            img {
+                filter: brightness(120%);
+                transform: scale(.96);
+            }
+        }
+        .a-car-icon {
+            img {
+                max-width: 20%;
+            }
+        }
+        .a-clock-icon {
+            img {
+                max-width: 10%;
+            }
+        }
+        .a-time {
+            background: whitesmoke;
+            padding: 10px;
+            span {
+                font-weight: bold;
+                font-size: 6vw;
+                color: #5297EB;
+            }
+        }
+        .a-price {
+            span {
+                font-weight: bold;
+                font-size: 8vw;
+                text-transform: uppercase;
+            }
+        }
+    }
+    .a-btn-bottom {
+        padding: 14px;
+        position: absolute;
+        bottom: 10px;
+        right: 10px;
+        left: 10px;
+        transition: .2s;
+        transform: scale(1);
+        filter: brightness(100%);
+        span {
+            text-transform: capitalize;
+            font-size: 5vw;
+            color: white;
+        }
+    }
+    .a-btn-bottom:active {
+        transform: scale(.96);
+        filter: brightness(120%);
+    }
+    .a-btn-sign-group {
+        .a-btn {
+            width: 50%;
+            padding: 10px;
+            span {
+                font-size: 5vw;
+                font-family: Arial;
+                text-align: center;
+                padding: 10px;
+            }
+        }
+    }
+}

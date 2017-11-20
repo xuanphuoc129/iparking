@@ -1,0 +1,34 @@
+<!--
+  Generated template for the SearchPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+    <div class="a3-container a3-justify-between a3-items-center a-background-header">
+        <div class="btn-back" text-center (click)="closeView()">
+            <img src="assets/ipark/icon/btn_back.png" alt="">
+        </div>
+        <ion-searchbar #searchBar class="animated slideInDown searchBar" placeholder="Nhập địa điểm" [animated]='true'></ion-searchbar>
+    </div>
+</ion-header>
+
+
+<ion-content>
+    <div class="a1-container" margin-top>
+        <div class="a-parks-item " *ngFor="let park of listParks" (click)="viewParkDetail(park)">
+            <div class="a3-container a3-items-center a3-justify-between">
+                <div class="a-parks-id "><span>{{park.parkID}}</span></div>
+                <div class="a-parks-favorite">
+                    <ion-icon name="star" [class.isFavor]="isFavorite(park)"></ion-icon>
+                </div>
+            </div>
+            <div class="a-parks-name">{{park.parkName}}</div>
+            <div class="a3-container a3-items-center a3-justify-between">
+                <div class="a-parks-address"><span>{{park.parkAddress}}</span></div>
+                <div class="a-parks-distance"><span>0km</span></div>
+            </div>
+        </div>
+    </div>
+
+</ion-content>

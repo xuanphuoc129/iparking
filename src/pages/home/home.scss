@@ -1,0 +1,59 @@
+page-home {
+    #map {
+        height: 100%;
+        width: 100%;
+        // background-image: url("../assets/ipark/image/map.png");
+        // background-position: center;
+        // background-size: cover;
+        // background-repeat: no-repeat;
+    }
+    ion-icon {
+        color: white;
+    }
+    ion-searchbar {
+        opacity: .8;
+    }
+    .divSearch {
+        animation-duration: 400ms;
+    }
+    .searchbar-md {
+        background: transparent;
+    }
+    .toolbar-background-md {
+        text-align: center;
+        background: linear-gradient(to right, #43cea2, #185a9d);
+    }
+    .a-home-info-Location {
+        border-radius: 5px;
+        padding: 12px;
+        box-shadow: 1px 1px 5px #888888;
+        background: whitesmoke;
+        span {
+            font-size: 4.5vw;
+        }
+        filter: brightness(100%);
+        transform: scale(1);
+        transition: .2s;
+    }
+    .a-home-info-Location:active {
+        filter: brightness(110%);
+        transform: scale(.96);
+    }
+    .a-home-find {
+        border-radius: 5px;
+        padding: 12px;
+        box-shadow: 1px 1px 5px #888888;
+        span {
+            text-transform: uppercase;
+            color: white;
+            font-size: 4.5vw;
+        }
+        filter: brightness(100%);
+        transform: scale(1);
+        transition: .2s;
+    }
+    .a-home-find:active {
+        filter: brightness(110%);
+        transform: scale(.96);
+    }
+}

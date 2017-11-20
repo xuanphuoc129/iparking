@@ -1,0 +1,10 @@
+{
+    "resources": [
+        "./assets/ipark/image/splash.png",
+        "./assets/ipark/image/im_intro_1.png",
+        "./assets/ipark/image/im_intro_2.png",
+        "./assets/ipark/image/im_intro_3.png",
+        "./assets/ipark/image/map.png",
+        "./assets/ipark/image/logo.png"
+    ]
+}

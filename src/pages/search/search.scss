@@ -1,0 +1,43 @@
+page-search {
+    .a-parks-item {
+        width: calc(100% - 20px);
+        margin: auto;
+        padding: 10px;
+        box-shadow: 0px 1px 2px #888888;
+        margin-bottom: 10px;
+        transform: scale(1);
+        filter: grayscale(0%);
+        transition: .2s;
+        .a-parks-favorite {
+            padding: 4px;
+            ion-icon {
+                color: #918e8e;
+            }
+        }
+        .isFavor {
+            color: yellow!important;
+        }
+        .a-parks-id {
+            span {
+                color: black;
+                font-weight: bold;
+                font-family: Arial;
+                text-transform: uppercase;
+                font-size: 5vw;
+            }
+        }
+        .a-parks-name {}
+        .a-parks-address {
+            span {
+                font-style: italic;
+            }
+        }
+    }
+    .searchBar {
+        animation-duration: 500ms;
+    }
+    .a-parks-item:active {
+        transform: scale(.96);
+        filter: grayscale(100%);
+    }
+}
