@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams,Searchbar } from 'ionic-angular';
 import { Parks } from '../../providers/iparking/class/parks';
 import { HomePage } from '../home/home';
 import { UsersProvider } from '../../providers/users/users';
+import { IparkingProvider } from '../../providers/iparking/iparking';
 
 /**
  * Generated class for the SearchPage page.
@@ -22,6 +23,7 @@ export class SearchPage {
   listParks = new Array<Parks>();
 
   constructor(
+    private mAppModule: IparkingProvider,
     private userModule: UsersProvider,
     public navCtrl: NavController, public navParams: NavParams) {
     this.loadParks();
@@ -44,9 +46,11 @@ export class SearchPage {
     }).catch((err)=>{})
   }
   loadParks(){
-    for(let i = 0 ; i < 20; i++){
-      this.listParks.push(new Parks());
-    }
+    this.mAppModule.getAllParks().then((res: any)=>{
+      if(res){
+        this.listParks= res;
+      }
+    }).catch((err)=>{})
   }
   closeView(){
     if(this.navCtrl.canGoBack()){

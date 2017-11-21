@@ -72,6 +72,8 @@ export class MapJsProvider {
     }
   }
   addMoveEvent() {
+    console.log("add event");
+    
     this.map.addListener('center_changed', () => {
       this.getOwnerInMap();
     })
@@ -85,11 +87,12 @@ export class MapJsProvider {
     return this.mapOption;
   }
   markers = [];
-  imageOwner = "../assets/ipark/icon/parking.png";
-  imageLocation = "../assets/ipark/icon/placeholder.png"
+  imageOwner = "./assets/ipark/icon/parking.png";
+  imageLocation = "./assets/ipark/icon/placeholder.png"
 
   addMarker(icon: any, position: any, content?: any, park?: Parks) {
-  
+    console.log("addmarker");
+    
     let marker = new google.maps.Marker({
       map: this.map,
       icon: icon,
@@ -129,6 +132,7 @@ export class MapJsProvider {
 
   }
   setMapOnAll(map) {
+    if(!this.markers || this.markers.length==0){return;}
     for (var i = 0; i < this.markers.length; i++) {
       this.markers[i].setMap(map);
     }
@@ -236,7 +240,8 @@ export class MapJsProvider {
   isMapReady: boolean = false;
   parksFilter = [];
   getOwnerInMap() {
-
+    console.log(this.parks.length);
+    
     let bounds = this.map.getBounds();
 
     let temp = [];

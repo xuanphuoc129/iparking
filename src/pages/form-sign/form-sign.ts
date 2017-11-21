@@ -25,12 +25,26 @@ export class FormSignPage {
     private modal: ModalController,
     private userModule: UsersProvider,
     public navCtrl: NavController, public navParams: NavParams) {
-    this.park = new Parks();
+      this.park = new Parks();
+      let date = new Date();
+      this.event.month = date.getFullYear()+'-'+(date.getMonth()+1)+'-'+date.getDate();
+      this.event.monthEnds = date.getFullYear()+'-'+(date.getMonth()+1)+'-'+date.getDate();
+      
+      if(date.getHours()<10){
+      this.event.timeStarts = '0'+date.getHours()+':'+date.getMinutes();
+      this.event.timeEnds = '0'+date.getHours()+':'+date.getMinutes();
+      }else{
+      this.event.timeStarts = date.getHours()+':'+date.getMinutes();
+      this.event.timeEnds = date.getHours()+':'+date.getMinutes();
+      }
+      console.log(this.event);
   }
   public event = {
     month: '2017-11-21',
     timeStarts: '00:00',
-    timeEnds: '2017-11-21'
+    monthEnds: '2017-11-21',
+    timeEnds: '00:00'
+
   }
   carID : string = "";
   ionViewDidEnter() {

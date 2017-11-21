@@ -133,4 +133,15 @@ export class SignupServicePage {
   GotoSignPark(){
     this.navCtrl.push("FormSignPage");
   }
+
+  GotoSignWash(){
+    this.navCtrl.push("FormWashPage");
+  }
+  GotoSignRepair(){
+    this.navCtrl.push("FormRepairPage");
+  }
+
+  GotoSignHotel(){
+    this.navCtrl.push("FormHotelPage");
+  }
 }

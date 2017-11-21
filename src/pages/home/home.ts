@@ -4,6 +4,7 @@ import { NavController, Searchbar } from 'ionic-angular';
 import firebase from 'firebase'
 import { GoogleMapProvider } from '../../providers/google-map/google-map';
 import { MapJsProvider } from '../../providers/map-js/map-js';
+import { IparkingProvider } from '../../providers/iparking/iparking';
 
 @Component({
   selector: 'page-home',
@@ -14,16 +15,22 @@ export class HomePage {
   @ViewChild("divSearch") divSearch: ElementRef;
   @ViewChild('searchbar', { read: ElementRef }) searchbar: ElementRef;
   constructor(
+    private mAppModule: IparkingProvider,
     private rd2: Renderer2,
     private mapModule: MapJsProvider,
     public navCtrl: NavController) {
 
   }
   ionViewDidLoad() {
-   this.goToLocation();
-   this.mapModule.setNavController(this.navCtrl);
+    this.mAppModule.getAllParks().then((res: any) => {
+      if (res) {
+        this.mapModule.parks = res;
+        this.goToLocation();
+        this.mapModule.setNavController(this.navCtrl);
+      }
+    })
   }
-  goToLocation(){
+  goToLocation() {
     this.mapModule.getLocation().then((res) => {
       if (res) {
         this.mapModule.initMap("map", res,true);
@@ -58,8 +65,8 @@ export class HomePage {
         // this.searchBar.clearInput();
         // console.log(this.searchBar.value);
         this.searchBar.setValue('');
-        this.mapModule.geocodeLatLng(this.mapModule.getCenterMap()).then((res : any)=>{
-          if(res){
+        this.mapModule.geocodeLatLng(this.mapModule.getCenterMap()).then((res: any) => {
+          if (res) {
             this.infoLocation = res;
           }
         })
