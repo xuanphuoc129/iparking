@@ -4,97 +4,36 @@
   See http://ionicframework.com/docs/components/#navigation for more info on
   Ionic pages and navigation.
 -->
-<ion-header>
-    <div class="a3-container a3-justify-between a3-items-center a-background-header a-park-header-height">
+<!-- <ion-header>
+    <div class="a3-container a3-justify-between a3-items-center  a-park-header-height">
         <div class="btn-back" text-center (click)="closeView()">
             <img src="assets/ipark/icon/btn_back.png" alt="">
         </div>
-        <div class="a-park-header-title">
-            <span>Đăng ký dịch vụ</span>
-        </div>
-        <div class="btn-back" text-center style="opacity: 0">
-            <img src="assets/ipark/icon/btn_back.png" alt="">
-        </div>
     </div>
-</ion-header>
+</ion-header> -->
 
 <ion-content>
-    <div class="a1-container" text-center>
-
-        <div class="a-sign-top" text-center>
-            <div class="a-sign-icon" text-center>
-                <img src="assets/ipark/icon/parked-car.png" alt="">
-            </div>
-            <div text-center class="a-sign-name"><span>Đăng ký đỗ xe</span></div>
+    <div class="a-top a3-container-center a3-column">
+        <div class="a1-relative" text-center>
+            <img src="assets/ipark/image/logo.png">
         </div>
-        <div style="height: 40px"></div>
-
-        <div class="a-park-status" text-left>
-            <div class="a-park-address"><span>Mã điểm đỗ : {{park.parkID}}</span></div>
-            <div class="a3-container a3-justify-between a3-items-center">
-                <div><span>{{park.parkAddress}}</span></div>
-                <div class="a-park-distance"><span>0km</span></div>
-            </div>
-            <div class="a-status"><span>Còn 0 chỗ trống</span></div>
+        <div class="a1-relative a-name" text-center>
+            <span>iParking</span>
         </div>
+    </div>
+    <div class="a-sign-service-container a1-relative">
+        <button ion-button block class="btn a-background-header" (click)="GotoSignPark()">Đăng ký gửi xe</button>
+        <div style="height: 10px"></div>
+        <button ion-button block class="btn a-background-header">Đăng ký sửa xe</button>
+        <div style="height: 10px"></div>
 
-        <div style="height: 40px"></div>
+        <button ion-button block class="btn a-background-header">Đăng ký rửa xe</button>
+        <div style="height: 10px"></div>
 
-        <div class="a-sign-form a1-relative">
-            <div class="a-car-icon" text-center>
-                <img src="assets/ipark/icon/ic_booking_car.png" alt="">
-            </div>
-            <div style="height: 10px"></div>
-            <div class="a3-container a3-items-center">
-                <div class="a-item-label" text-center (click)="getCars()">
-                    <img src="assets/ipark/icon/exchange.png" alt="">
-                </div>
-                <div class="a-item-name"><span>{{carID}}</span></div>
-                <div class="a-btn-add" text-center (click)="addCar()">
-                    <img src="assets/ipark/icon/plus.png" alt="">
-                </div>
-            </div>
+        <button ion-button block class="btn a-background-header">Đặt phòng</button>
+        <div style="height: 30px"></div>
 
-            <div style="height: 20px"></div>
-
-            <div text-center class="a-clock-icon">
-                <img src="assets/ipark/icon/clock.png" alt="">
-            </div>
-            <div class="a-time" text-center (click)="showRadio()">
-                <span>{{testRadioResult}} giờ</span>
-            </div>
-
-            <div style="height: 20px"></div>
-
-            <div class="a-price" text-center>
-                <span>{{testRadioResult*2}}0000đ</span>
-            </div>
-        </div>
-        <div class="a-btn-bottom a3-container-center a-background-header">
-            <span>Đăng ký</span>
-        </div>
+        <button ion-button block class="btn a-background-header" (click)="closeView()">Quay lại</button>
 
     </div>
-
-
-    <!-- <div class="a-btn-sign-group">
-        <div class="a3-container ">
-            <div class="a-btn a3-container-center ">
-            </div>
-            <div class="a-btn a3-container-center ">
-                <img src="assets/ipark/icon/repair-service.png" alt="">
-                <div text-center><span>Đăng ký sửa xe</span></div>
-            </div>
-        </div>
-        <div style="height: 20px"></div>
-        <div class="a3-container">
-            <div class="a-btn a3-container-center ">
-                <img src="assets/ipark/icon/car-wash.png" alt="">
-                <div text-center><span>Đăng ký đỗ xe</span></div>
-            </div>
-            <div class="a-btn a3-container-center ">
-                <img src="assets/ipark/icon/building.png" alt="">
-                <div text-center><span>Đăng ký sửa xe</span></div>
-            </div>
-        </div>
-    </div> -->
+</ion-content>

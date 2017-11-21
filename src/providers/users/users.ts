@@ -139,4 +139,16 @@ export class UsersProvider {
     })
   }
 
+  passwordreset(email) {
+    var promise = new Promise((resolve) => {
+      firebase.auth().sendPasswordResetEmail(email).then(() => {
+        resolve(1);
+      }).catch((err) => {
+        alert(err);
+        resolve(0);
+      })
+    })
+    return promise;
+  }
+
 }

@@ -22,10 +22,10 @@
         </div>
         <div style="height: 10px"></div>
         <div class="a-seat" id="seat" (click)="showRadio()">
-            <span>{{testRadioResult}} chỗ</span>
+            <span [hidden]="!isActive">{{testRadioResult}} chỗ</span>
         </div>
         <div style="height: 10px"></div>
-        <div class="button-add" (click)="closeView()">
+        <div class="button-add a-background-button" (click)="closeView()">
             <span>Thêm</span>
         </div>
         <div style="height: 10px"></div>

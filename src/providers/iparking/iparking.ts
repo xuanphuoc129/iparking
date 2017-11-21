@@ -40,8 +40,10 @@ export class IparkingProvider {
   }
 
   addParks(newParks: Parks){
+    console.log(firebase.auth().currentUser);
+    
     return new Promise((resolve,reject)=>{
-      firebase.database().ref("/parks").child(newParks.parkID).set({
+      firebase.database().ref('/parks').child(newParks.parkID).set({
         parkID : newParks.parkID,
         parkName : newParks.parkName,
         parksHotLine: newParks.parksHotLine,
@@ -64,6 +66,23 @@ export class IparkingProvider {
     })
   }
 
-  
+  getAllParks(){
+    return new Promise((resolve,reject)=>{
+      firebase.database().ref('/parks').once('value',(snapshot)=>{
+        if(snapshot){
+          let data = snapshot.val();
+          let temp = [];
+          for (const key in data) {
+            temp.push(new Parks(data[key]));              
+          }
+          resolve(temp);
+        }
+      }).catch((err)=>{
+        alert(err);
+        resolve(0);
+      })
+    })
+  }
+
 
 }

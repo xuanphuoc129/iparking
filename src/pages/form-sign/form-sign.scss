@@ -1,0 +1,56 @@
+page-form-sign {
+    // ion-content.content {
+    //     background-color: #1B3951;
+    // }
+    .item-md.item-block .item-inner {
+        border: none;
+    }
+    .toolbar-background-md {
+        text-align: center;
+        background-color: #059F9E;
+    }
+    .a-top {
+        .a-address {
+            width: calc(100% - 20px);
+            margin: auto;
+            background: #059F9E;
+            padding: 10px;
+            color: white;
+            .address {
+                span {
+                    font-size: 5vw;
+                    font-family: 'Tahoma';
+                    color: white;
+                }
+            }
+        }
+    }
+    .a-form-bottom {
+        .car {
+            img {
+                width: 72px;
+            }
+        }
+        .btn {
+            width: 20%;
+            text-align: center;
+            img {
+                width: 36px;
+                transition: .2s;
+                filter: brightness(100%);
+            }
+        }
+        .btn:active {
+            img {
+                filter: brightness(120%);
+            }
+        }
+        .carid {
+            span {
+                color: #1B3951;
+                font-weight: bold;
+                font-size: 5.5vw;
+            }
+        }
+    }
+}

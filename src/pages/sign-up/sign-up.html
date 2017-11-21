@@ -1,4 +1,70 @@
 <ion-content>
+    <div class="a-top a3-container-center a3-column">
+        <div class="a1-relative" text-center>
+            <img src="assets/ipark/image/logo.png">
+        </div>
+        <div class="a1-relative a-name" text-center>
+            <span>iParking</span>
+        </div>
+    </div>
+
+    <div class="a-bottom">
+        <div class="list-container">
+            <ion-list no-line>
+                <ion-item class="border-top">
+                    <ion-label>
+                        <ion-icon name="mail"></ion-icon>
+                    </ion-label>
+                    <ion-input type="email" [(ngModel)]="user.email" (input)="inputEmail()" required placeholder="Email"></ion-input>
+                </ion-item>
+                <p ion-text [hidden]="submitEmail === false" color="danger">
+                    Bạn chưa điền email
+                </p>
+
+                <ion-item>
+                    <ion-label>
+                        <ion-icon name="lock"></ion-icon>
+                    </ion-label>
+                    <ion-input type="password" [(ngModel)]="user.password" (input)="inputPassword()" required placeholder="Password"></ion-input>
+                </ion-item>
+
+                <p ion-text [hidden]="submitPassword === false" color="danger">
+                    Bạn chưa điền password
+                </p>
+
+                <ion-item>
+                    <ion-label>
+                        <ion-icon name="call"></ion-icon>
+                    </ion-label>
+                    <ion-input type="tel" [(ngModel)]="user.phoneNumber" maxlength="11" (input)="inputPhone()" required placeholder="Phone number"></ion-input>
+                </ion-item>
+                <p ion-text [hidden]="submitPhone === false" color="danger">
+                    Bạn chưa nhập số điện thoại
+                </p>
+
+                <ion-item>
+                    <ion-label>
+                        <ion-icon name="person"></ion-icon>
+                    </ion-label>
+                    <ion-input type="text" [(ngModel)]="user.displayName" (input)="inputName()" required placeholder="Full name"></ion-input>
+                </ion-item>
+                <p ion-text [hidden]="submitName === false" color="danger">
+                    Hãy cho chúng tôi biết tên của bạn!
+                </p>
+
+                <div style="height: 40px"></div>
+
+                <div class="a3-container a3-justify-between">
+                    <button margin-right ion-button block class="btn-signin" (click)="back()">Back</button>
+
+                    <button margin-left ion-button block class="btn-signin" (click)="signup()">Signup</button>
+                </div>
+            </ion-list>
+        </div>
+    </div>
+</ion-content>
+
+<!-- <ion-content>
     <div class="a1-content-center a-login-form">
         <div class="form-title" text-center>
             <span>Đăng ký</span>
@@ -42,4 +108,4 @@
             <button ion-button block (click)="signup()">Đăng ký</button>
         </div>
     </div>
-</ion-content>
+</ion-content> -->

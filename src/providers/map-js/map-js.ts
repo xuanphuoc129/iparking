@@ -5,6 +5,7 @@ import { Observable } from 'rxjs/Observable';
 import { ElementRef } from '@angular/core/src/linker/element_ref';
 import { IparkingProvider } from '../iparking/iparking';
 import { Parks } from '../iparking/class/parks';
+import { NavController } from 'ionic-angular/navigation/nav-controller';
 
 declare var google;
 
@@ -17,105 +18,115 @@ declare var google;
 */
 @Injectable()
 export class MapJsProvider {
+  private mNavController : NavController = null;
   constructor(
     private mAppModule: IparkingProvider,
     private geolocation: Geolocation,
     public http: HttpClient) {
     console.log('Hello MapJsProvider Provider');
-    this.currentLocation = new google.maps.LatLng(20.28323,105.322332);
+    this.currentLocation = new google.maps.LatLng(20.28323, 105.322332);
   }
   currentLocation: any;
   mapOption: any;
   map: any;
   geocoder = new google.maps.Geocoder;
-  getLocation(){
-    return new Promise((resolve,reject)=>{
-      this.geolocation.getCurrentPosition().then((res)=>{
-        if(res){
+  public nowArress : string = '';
+  public parks = new Array<Parks>();
+
+  public setNavController(nav: NavController) {
+    if (this.mNavController) return;
+    this.mNavController = nav;
+  }
+  getLocation() {
+    return new Promise((resolve, reject) => {
+      this.geolocation.getCurrentPosition().then((res) => {
+        if (res) {
           this.currentLocation = {
             lat: res.coords.latitude,
             lng: res.coords.longitude
           }
           resolve(this.currentLocation);
         }
+      }).catch((err) => {
+        alert("Can't get your location");
+        resolve(this.currentLocation);
       })
     })
-   
+
   }
-  initMap(mapID: string, position?: any): void {
+  initMap(mapID: string, position?: any, event?: boolean): void {
     let mapElement = document.getElementById(mapID);
-    if(position){
+    if (position) {
       this.currentLocation = new google.maps.LatLng(position.lat, position.lng);
     }
     if (mapElement) {
       this.setMapoptionDefault(this.currentLocation);
       this.map = new google.maps.Map(mapElement, this.mapOption);
-      this.addMarker(this.imageLocation,this.currentLocation);
-      // this.geocodeLatLng(this.map);
-      this.addClickEvent();
-      
+      this.addMarker(this.imageLocation, this.currentLocation);
+      if(event){
+        this.addMoveEvent();
+        setTimeout(() => {
+          this.getOwnerInMap();
+        }, 300);
+      }
     }
   }
-  dem = 0;
-  addClickEvent(){
-    this.map.addListener('click',(ev)=>{
-      console.log(ev.latLng);
-      this.addMarker(this.imageOwner,ev.latLng);
-      let newpark = new Parks();
-      newpark.setParkID("MH"+this.dem);
-      newpark.setILatlng(ev.latLng);
-      newpark.setOwnerID("OW"+this.dem);
-      this.geocodeLatLng(ev.latLng).then((res: any)=>{
-        if(res){
-          newpark.setAddress(res);
-          this.mAppModule.addParks(newpark).then((res)=>{
-            if(res){
-              console.log(newpark.parkID);
-              
-            }
-          });
-        }
-      });
-
-    }) 
+  addMoveEvent() {
+    this.map.addListener('center_changed', () => {
+      this.getOwnerInMap();
+    })
   }
   setMapoptionDefault(position) {
     this.mapOption = {
       center: position,
-      zoom: 14 ,
-      tilt: 22
+      zoom: 14,
+      tilt: 24
     }
     return this.mapOption;
   }
   markers = [];
-  imageOwner = {
-    url: "../assets/ipark/icon/parking.png"
-  };
-  imageLocation = {
-    url: "../assets/ipark/icon/placeholder.png"
-  };
-  addMarker(icon: any,position :any, content?:any) {
+  imageOwner = "../assets/ipark/icon/parking.png";
+  imageLocation = "../assets/ipark/icon/placeholder.png"
+
+  addMarker(icon: any, position: any, content?: any, park?: Parks) {
+  
     let marker = new google.maps.Marker({
       map: this.map,
       icon: icon,
-      animation: google.maps.Animation.DROP,
-      position: position,
+      // animation: google.maps.Animation.DROP,
+      position: position
     });
-    if(content){
-      this.addInfoWindow(marker, content);
+    if(park){
+      var label = {
+        color: 'black',
+        fontWeight: 'bold',
+        text: park.parkID
+      }
+      marker.setLabel(label);
+    }
+    if (content) {
+      if(park){
+        this.addInfoWindow(marker, content,park);
+      }else{
+        this.addInfoWindow(marker, content);
+      }
       this.markers.push(marker);
       return marker;
-    }else{
+    } else {
       this.geocodeLatLng(position).then((res) => {
         if (res) {
           let content = res;
-          this.addInfoWindow(marker, content);
+          if(park){
+            this.addInfoWindow(marker, content,park);
+          }else{
+            this.addInfoWindow(marker, content);
+          }
           this.markers.push(marker);
           return marker;
         }
       })
     }
-   
+
   }
   setMapOnAll(map) {
     for (var i = 0; i < this.markers.length; i++) {
@@ -130,18 +141,42 @@ export class MapJsProvider {
     this.clearMarkers();
     this.markers = [];
   }
-  getCenterMap(){
+  removeMarker(marker): boolean {
+
+    if (this.markers.length > 0) {
+      for (let i = 0; i < this.markers.length; i++) {
+        if (this.markers[i].getPosition().lat() == marker.ILatLng.lat && this.markers[i].getPosition().lng() == marker.ILatLng.lng) {
+          this.markers.splice(i, 1);
+          return true;
+        }
+      }
+    }
+    return false;
+  }
+  getCenterMap() {
     return this.map.getCenter();
   }
 
-  addInfoWindow(marker, content) {
-
+  addInfoWindow(marker, content, park?: Parks) {
+    
     let infoWindow = new google.maps.InfoWindow({
       content: content
     });
-
+    if(park){
+      infoWindow.setContent(park.parkName);
+    }
     google.maps.event.addListener(marker, 'click', () => {
+      if(park){
+      this.nowArress = park.parkAddress;
+      console.log(park);
+      if(this.mNavController){
+        this.mNavController.push("ParkDetailPage",{
+          park: park
+        })
+      }
+      }
       infoWindow.open(this.map, marker);
+      // this.nowArress = content;
     });
 
   }
@@ -151,6 +186,7 @@ export class MapJsProvider {
       this.geocoder.geocode({ 'location': position }, (results, status) => {
         if (status === 'OK') {
           if (results[0]) {
+            this.nowArress = results[0].formatted_address;
             resolve(results[0].formatted_address);
           } else {
             window.alert('No results found');
@@ -171,8 +207,8 @@ export class MapJsProvider {
       console.log('Searchdata', location);
 
       this.map.setOptions(this.setMapoptionDefault(location));
-      this.deleteAllMarkers();
-      this.addMarker(this.imageLocation,location);
+      // this.deleteAllMarkers();
+      this.addMarker(this.imageLocation, location);
 
     });
   }
@@ -196,5 +232,80 @@ export class MapJsProvider {
     });
   }
 
-  
+
+  isMapReady: boolean = false;
+  parksFilter = [];
+  getOwnerInMap() {
+
+    let bounds = this.map.getBounds();
+
+    let temp = [];
+    if (this.parks.length > 0) {
+      for (let i = 0; i < this.parks.length; i++) {
+        if (bounds.contains(new google.maps.LatLng(this.parks[i].ILatLng.lat, this.parks[i].ILatLng.lng))) {
+          temp.push(this.parks[i]);
+          // this.addMarker(this.imageOwner, this.parks[i].ILatLng, this.parks[i].parkAddress);
+        }
+      }
+    }
+
+    if (!temp || temp.length == 0) { return; }
+    if (!this.parksFilter || this.parksFilter.length == 0) {
+      this.parksFilter = temp;
+      for (let j = 0; j < this.parksFilter.length; j++) {
+        this.addMarker(this.imageOwner, this.parksFilter[j].ILatLng, this.parksFilter[j].parkAddress,this.parksFilter[j]);
+      }
+    } else {
+      // console.log("newresult", temp.length);
+      // console.log("parksfilter", this.parksFilter.length);
+      // console.log("markers", this.markers.length);
+      var check: boolean = false;
+
+      //add new element
+      for (let m = 0; m < temp.length; m++) {
+        let newpark = temp[m];
+        check = false;
+        for (let n = 0; n < this.parksFilter.length; n++) {
+          if (newpark.parkID == this.parksFilter[n].parkID) {
+            check = true;
+            break;
+          }
+        }
+        if (!check) {
+          this.parksFilter.push(newpark);
+          this.addMarker(this.imageOwner, newpark.ILatLng, newpark.parkAddress,newpark);
+        }
+      }
+      //remove element 
+      for (let k = this.parksFilter.length - 1; k > 0; k--) {
+        let park = this.parksFilter[k];
+        check = false;
+        for (let z = 0; z < temp.length; z++) {
+          if (park.parkID == temp[z].parkID) {
+            check = true;
+            break;
+          }
+        }
+        if (!check) {
+          this.parksFilter.splice(k, 1);
+          this.markers.splice(k, 1);
+        }
+      }
+
+      // console.log("parksfilter", this.parksFilter.length);
+      // console.log("markers", this.markers.length);
+      
+    }
+
+  }
+  // removeElemnt(element,array){
+  //   for(let i = 0 ; i < array.length; i ++){
+  //     if(element == array[i]){
+  //       array.splice(i,1);
+  //       break;
+  //     }
+  //   }
+  //   return array;
+  // }
+
 }

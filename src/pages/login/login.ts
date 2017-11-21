@@ -81,4 +81,8 @@ export class LoginPage {
   inputPassword() {
     this.submitPassword = false;
   }
+
+  passwordreset(){
+    this.navCtrl.push("ResetPasswordPage");
+  }
 }

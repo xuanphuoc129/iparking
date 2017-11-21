@@ -21,7 +21,14 @@ page-home {
     }
     .toolbar-background-md {
         text-align: center;
-        background: linear-gradient(to right, #43cea2, #185a9d);
+        background-color: #059F9E;
+    }
+    .toolbar-title-ios {
+        color: white;
+    }
+    .toolbar-background-ios {
+        text-align: center;
+        background-color: #059F9E;
     }
     .a-home-info-Location {
         border-radius: 5px;

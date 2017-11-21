@@ -1,22 +1,111 @@
 page-sign-up {
-    ion-content {
-        background-image: url("../assets/ipark/image/background_3.jpg");
-        background-size: cover;
-        background-position: center;
-        background-repeat: no-repeat;
+    ion-content.content {
+        background-color: #1B3951;
     }
-    .a-login-form {
-        width: 80%;
-        .a-input-form {
-            background: rgba($color: black, $alpha: .2);
-            border-radius: 10px;
+    .scroll-content {
+        align-content: center;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        text-align: center;
+        padding: 0px !important;
+    }
+    .a-top {
+        position: relative;
+        height: 50%;
+        width: 100%;
+        text-align: center;
+        img {
+            max-width: 20%;
         }
-        .form-title {
-            span {
-                color: white;
-                font-size: 8vw;
-                font-weight: bold;
+    }
+    .a-bottom {
+        position: relative;
+        height: 50%;
+        width: 100%;
+        text-align: center;
+        .list-container {
+            width: 70%;
+            margin: auto;
+            .item-inner {
+                box-shadow: none!important;
+            }
+            .item {
+                background: transparent!important;
+                // #4D6275
+                // #D6DCE0
+                //#059F9E
+                // #D6DCE0
+                border-bottom: 1px solid #4D6275;
+                ion-icon {
+                    color: #D6DCE0!important;
+                }
+                ion-label {
+                    width: 20px!important;
+                    text-align: center;
+                }
+                .text-input,
+                {
+                    color: #D6DCE0;
+                }
+                input::-moz-placeholder {
+                    color: #D6DCE0!important;
+                }
+                input:-moz-placeholder {
+                    color: #D6DCE0!important;
+                }
+                *::-webkit-input-placeholder {
+                    color: #D6DCE0!important;
+                }
+                *:-ms-input-placeholder {
+                    color: #D6DCE0!important;
+                }
+                *:-moz-placeholder {
+                    color: #D6DCE0!important;
+                }
+            }
+            .border-top {
+                border-top: 1px solid #4D6275;
+            }
+            .list-md .item-block .item-inner {
+                border: none!important;
+            }
+            .list-ios .item-block .item-inner {
+                border: none!important;
+            }
+            .btn-signin {
+                background-color: #059F9E;
             }
         }
     }
+    .a-name {
+        span {
+            color: white;
+            font-weight: bold;
+            font-size: 9vw;
+        }
+    }
+    a {
+        color: #D6DCE0;
+    }
+    // ion-content {
+    //     background-image: url("../assets/ipark/image/background_3.jpg");
+    //     background-size: cover;
+    //     background-position: center;
+    //     background-repeat: no-repeat;
+    // }
+    // .a-login-form {
+    //     width: 80%;
+    //     .a-input-form {
+    //         background: rgba($color: black, $alpha: .2);
+    //         border-radius: 10px;
+    //     }
+    //     .form-title {
+    //         span {
+    //             color: white;
+    //             font-size: 8vw;
+    //             font-weight: bold;
+    //         }
+    //     }
+    // }
 }

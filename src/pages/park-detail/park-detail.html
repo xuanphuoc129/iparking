@@ -20,30 +20,7 @@
 </ion-header>
 <ion-content>
     <div id="parkMapID"></div>
-    <div>
-        <div class="a-detail-listHeader ">
-            <div class="a-detail-parkName"><span>{{park.parkName}}</span></div>
-            <div class="a-detail-parkRate">
-                <span>{{park.rate}}</span>
-                <span>
-                    <ion-icon name="star"></ion-icon>
-                    <ion-icon name="star"></ion-icon>
-                    <ion-icon name="star"></ion-icon>
-                    <ion-icon name="star"></ion-icon>
-                    <ion-icon name="star"></ion-icon>
-                </span>
-            </div>
-        </div>
-        <div class="a-detail-social a3-container a-">
-            <div class="a3-container a3-column a3-items-center a3-item">
-                <ion-icon name="bookmark"></ion-icon>
-                <span>Lưu</span>
-            </div>
-            <div margin-left class="a3-container a3-column  a3-items-center a3-item">
-                <ion-icon name="share"></ion-icon>
-                <span>Chia sẻ</span>
-            </div>
-        </div>
+    <div class="a-detail-container">
         <ion-list style="margin-top: 5px">
             <ion-item *ngFor="let item of listItems" class="a-list-detail">
                 <ion-icon item-start name="{{item.icon}}"></ion-icon>
@@ -51,7 +28,7 @@
             </ion-item>
         </ion-list>
     </div>
-    <div class="a-background-header a-btn-bottom " text-center padding (click)="goToSign()">
+    <div class="a-background-button a-btn-bottom " text-center (click)="goToSign()">
         <span>Đăng ký dịch vụ</span>
     </div>
 </ion-content>

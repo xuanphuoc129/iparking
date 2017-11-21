@@ -19,25 +19,26 @@ export class HomePage {
     public navCtrl: NavController) {
 
   }
-  ionViewDidEnter() {
+  ionViewDidLoad() {
    this.goToLocation();
+   this.mapModule.setNavController(this.navCtrl);
   }
   goToLocation(){
     this.mapModule.getLocation().then((res) => {
       if (res) {
-        this.mapModule.initMap("map", res);
-        this.getInfoLocation(res);
+        this.mapModule.initMap("map", res,true);
+        // this.getInfoLocation(res);
       }
     })
   }
   infoLocation: string = "Lorem";
-  getInfoLocation(position) {
-    this.mapModule.geocodeLatLng(position).then((res: any) => {
-      if (res) {
-        this.infoLocation = res;
-      }
-    }).catch((err) => { })
-  }
+  // getInfoLocation(position) {
+  //   this.mapModule.geocodeLatLng(position).then((res: any) => {
+  //     if (res) {
+  //       this.infoLocation = res;
+  //     }
+  //   }).catch((err) => { })
+  // }
   goToSearchPage() {
     this.navCtrl.push("SearchPage");
   }

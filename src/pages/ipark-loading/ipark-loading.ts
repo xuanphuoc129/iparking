@@ -8,6 +8,7 @@ import { HomePage } from '../home/home';
 import firebase from 'firebase';
 import { StorageProvider } from '../../providers/storage/storage';
 import { AppController } from '../../providers/app-controller';
+import { MapJsProvider } from '../../providers/map-js/map-js';
 
 @IonicPage()
 @Component({
@@ -17,6 +18,7 @@ import { AppController } from '../../providers/app-controller';
 export class IparkLoadingPage {
 
   constructor(
+    private mapModule : MapJsProvider,
     private loadingCtrl: LoadingController,
     private toastCtrl: ToastController,
     private storageModule: StorageProvider,
@@ -31,6 +33,7 @@ export class IparkLoadingPage {
     this.splash.hide();
   }
   ionViewDidEnter() {
+   
     AppController.getInstance().setToastController(this.toastCtrl);
     AppController.getInstance().setLoadingController(this.loadingCtrl);
     this.mAppModule.loadConfig().then(
@@ -52,17 +55,24 @@ export class IparkLoadingPage {
   }
 
   onLoaded() {
-    this.storageModule.isLogIn().then((res)=>{
+    this.mAppModule.getAllParks().then((res : any)=>{
       if(res){
-        this.navCtrl.setRoot(HomePage, {
-          animated: false
-        })
-      }else{
-        this.navCtrl.setRoot("WellComePage", {
-          animated: false
-        })
+        this.mapModule.parks = res;
+        console.log(this.mapModule.parks);
+        this.storageModule.isLogIn().then((res)=>{
+          if(res){
+            this.navCtrl.setRoot(HomePage, {
+              animated: false
+            })
+          }else{
+            this.navCtrl.setRoot("WellComePage", {
+              animated: false
+            })
+          }
+        }).catch((err)=>{})
       }
     }).catch((err)=>{})
+   
 
   }
 

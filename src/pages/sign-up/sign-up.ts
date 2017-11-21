@@ -30,7 +30,13 @@ export class SignUpPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad SignUpPage');
   }
-
+  back(){
+    if(this.navCtrl.canGoBack()){
+      this.navCtrl.pop();
+    }else{
+      this.navCtrl.setRoot("WellComePage");
+    }
+  }
   submitEmail = false;
   submitPassword = false;
   submitPhone = false;

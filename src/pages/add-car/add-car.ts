@@ -69,6 +69,7 @@ export class AddCarPage {
   testRadioResult: number = 4;
   seats: boolean[] = [true, false, false, false];
   showRadio() {
+    if(!this.isActive){return;}
     let alert = this.alertCtrl.create();
     alert.setTitle('Số chỗ');
 

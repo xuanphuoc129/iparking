@@ -44,7 +44,7 @@ export class MyApp {
     {icon:"help", name: "Trợ giúp", component:""},
     {icon:"information-circle", name: "Thông tin ứng dụng", component:""},
     {icon: "pin",name:"Trở thành Owner",component:""},
-    {icon: "person",name:"Tài khoản",component:""},
+    {icon: "person",name:"Tài khoản",component:"ProfilePage"},
   ];
   constructor(
     platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen) {

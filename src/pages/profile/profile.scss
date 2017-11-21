@@ -1,4 +1,4 @@
-page-login {
+page-profile {
     ion-content.content {
         background-color: #1B3951;
     }
@@ -17,6 +17,13 @@ page-login {
         text-align: center;
         img {
             max-width: 20%;
+        }
+    }
+    .a-name {
+        span {
+            color: white;
+            font-weight: bold;
+            font-size: 9vw;
         }
     }
     .a-bottom {
@@ -77,15 +84,5 @@ page-login {
                 background-color: #059F9E;
             }
         }
-    }
-    .a-name {
-        span {
-            color: white;
-            font-weight: bold;
-            font-size: 9vw;
-        }
-    }
-    a {
-        color: #D6DCE0;
     }
 }

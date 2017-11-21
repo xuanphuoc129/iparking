@@ -24,10 +24,10 @@
     <div class="a1-container-bottom" [hidden]="isShowSearchBar===true">
         <div class="a1-relative" style="padding: 10px">
             <div class="a-home-info-Location">
-                <span>{{infoLocation}}</span>
+                <span>{{mapModule.nowArress}}</span>
             </div>
             <div style="height: 10px;"></div>
-            <div class="a3-container-center a-home-find a-background-header" (click)="goToSearchPage()">
+            <div class="a3-container-center a-home-find a-background-button" (click)="goToSearchPage()">
                 <span>Tìm kiếm gần đây</span>
             </div>
         </div>

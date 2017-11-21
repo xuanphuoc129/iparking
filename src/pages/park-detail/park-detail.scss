@@ -3,7 +3,7 @@ page-park-detail {
         background: whitesmoke;
     }
     #parkMapID {
-        height: 30%;
+        height: 40%;
         width: 100%;
         background-image: url("../assets/ipark/image/map.png");
         background-position: center;
@@ -15,6 +15,10 @@ page-park-detail {
     }
     .starActive {
         color: #ffff1a!important;
+    }
+    .a-detail-container {
+        height: 50%;
+        overflow: scroll;
     }
     .a-detail-listHeader {
         padding: 5px;
@@ -49,7 +53,6 @@ page-park-detail {
                 font-size: 8vw;
             }
         }
-        border-bottom: 1px solid #dcdcdc;
     }
     .a-btn-bottom {
         position: absolute;
@@ -59,6 +62,7 @@ page-park-detail {
         filter: brightness(100%);
         transform: scale(1);
         transition: .2s;
+        padding: 10px;
         span {
             font-size: 5vw;
             text-transform: uppercase;

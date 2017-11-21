@@ -130,4 +130,7 @@ export class SignupServicePage {
     });
     alert.present();
   }
+  GotoSignPark(){
+    this.navCtrl.push("FormSignPage");
+  }
 }

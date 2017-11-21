@@ -58,7 +58,6 @@ export class GoogleMapProvider {
         zoom: 14,
         tilt: 0
       }
-     
       
         this.map = GoogleMaps.create(divID,{
           camera: cameraOption,
