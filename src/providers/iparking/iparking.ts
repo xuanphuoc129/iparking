@@ -83,6 +83,15 @@ export class IparkingProvider {
       })
     })
   }
-
+  compare2Date(a: Date, b: Date): number{
+    if(a.getDate() == b.getDate() && a.getMonth() == b.getMonth() && a.getFullYear()==b.getFullYear()){
+      return 2;
+    }
+    if(a<b){
+      return 1;
+    }else{
+      return 0;
+    }
+  }
 
 }

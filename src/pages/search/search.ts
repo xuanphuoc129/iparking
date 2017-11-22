@@ -4,6 +4,8 @@ import { Parks } from '../../providers/iparking/class/parks';
 import { HomePage } from '../home/home';
 import { UsersProvider } from '../../providers/users/users';
 import { IparkingProvider } from '../../providers/iparking/iparking';
+import { MapPoint } from '../../providers/common/map-point';
+import { MapJsProvider } from '../../providers/map-js/map-js';
 
 /**
  * Generated class for the SearchPage page.
@@ -21,12 +23,14 @@ export class SearchPage {
   @ViewChild(Searchbar) searchBar: Searchbar;
 
   listParks = new Array<Parks>();
-
+  location: MapPoint;
   constructor(
+    private mapModule :MapJsProvider,
     private mAppModule: IparkingProvider,
     private userModule: UsersProvider,
     public navCtrl: NavController, public navParams: NavParams) {
     this.loadParks();
+    this.location = new MapPoint();
   }
 
   ionViewDidEnter() {
@@ -46,11 +50,24 @@ export class SearchPage {
     }).catch((err)=>{})
   }
   loadParks(){
-    this.mAppModule.getAllParks().then((res: any)=>{
+    this.mapModule.getLocation().then((res: any)=>{
       if(res){
-        this.listParks= res;
+        this.location.set(res.lat,res.lng);
+        this.mAppModule.getAllParks().then((res: any)=>{
+          if(res){
+            let temp = res;
+            for (const key in temp) {
+              if(this.location.getDistanceInKm(temp[key].ILatLng.lat,temp[key].ILatLng.lng) < 2){
+                let park = new Parks(temp[key]);
+                park.setDistance(this.location.getDistanceInKm(temp[key].ILatLng.lat,temp[key].ILatLng.lng).toFixed(2));
+                this.listParks.push(park);
+              }
+            }
+          }
+        }).catch((err)=>{})
       }
-    }).catch((err)=>{})
+    })
+   
   }
   closeView(){
     if(this.navCtrl.canGoBack()){

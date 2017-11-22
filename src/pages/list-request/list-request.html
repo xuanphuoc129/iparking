@@ -1,0 +1,59 @@
+<!--
+  Generated template for the ListRequestPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+    <ion-navbar>
+        <ion-title>Danh sách dịch vụ đang đăng ký</ion-title>
+    </ion-navbar>
+
+</ion-header>
+
+<ion-content>
+    <div class="spacer" style="height: 10px"></div>
+    <div class="a-request" *ngFor="let w of wList ; let i = index">
+        <div class="a-mh"><span>Điểm dịch vụ : {{w.MH}}</span></div>
+        <div class="a-rid">Bãi rửa xe: <span>{{w.washID}}</span></div>
+        <div class="a-car">Xe {{w.carID}}</div>
+        <div class="a-time">Ngày gửi: {{w.timeStamp}}</div>
+        <div class="a3-container a3-justify-between a3-items-center">
+            <div class="a-status">Trạng thái: Pending</div>
+            <div class="a-delete" (click)="showConfirm(w,'1',i)">Hủy</div>
+        </div>
+    </div>
+    <div class="a-request" *ngFor="let w of rList ; let i= index">
+        <div class="a-mh"><span>Điểm dịch vụ : {{w.MH}}</span></div>
+        <div class="a-rid">Bãi sửa xe: <span>{{w.repairID}}</span></div>
+        <div class="a-car">Xe {{w.carID}}</div>
+        <div class="a-time">Ngày gửi: {{w.timeStamp}}</div>
+        <div class="a3-container a3-justify-between a3-items-center">
+            <div class="a-status">Trạng thái: Pending</div>
+            <div class="a-delete" (click)="showConfirm(w,'2',i)">Hủy</div>
+        </div>
+    </div>
+
+    <div class="a-request" *ngFor="let w of pList ; let i = index">
+        <div class="a-mh"><span>Điểm dịch vụ : {{w.MH}}</span></div>
+        <div class="a-rid">Bãi đỗ xe: <span>{{w.pid}}</span></div>
+        <div class="a-car">Xe {{w.carID}}</div>
+        <div class="a-time">Ngày gửi: {{w.timeStamp}}</div>
+        <div class="a3-container a3-justify-between a3-items-center">
+            <div class="a-status">Trạng thái: Pending</div>
+            <div class="a-delete" (click)="showConfirm(w,'3',i)">Hủy</div>
+        </div>
+    </div>
+
+    <div class="a-request" *ngFor="let w of hList ; let i = index">
+        <div class="a-mh"><span>Điểm dịch vụ : {{w.MH}}</span></div>
+        <div class="a-rid">Khách sạn: <span>{{w.hotelID}}</span></div>
+        <div class="a-time">Ngày gửi: {{w.timeStamp}}</div>
+        <div class="a3-container a3-justify-between a3-items-center">
+            <div class="a-status">Trạng thái: Pending</div>
+            <div class="a-delete" (click)="showConfirm(w,'4',i)">Hủy</div>
+        </div>
+    </div>
+
+</ion-content>

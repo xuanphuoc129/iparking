@@ -34,7 +34,7 @@
         <ion-item-divider color="light">Thời gian</ion-item-divider>
         <ion-item>
             <ion-label>Ngày đến</ion-label>
-            <ion-datetime displayFormat="MMM DD YYYY" [(ngModel)]="event.month"></ion-datetime>
+            <ion-datetime displayFormat="MMM DD YYYY" [(ngModel)]="event.dateStarts"></ion-datetime>
         </ion-item>
 
         <ion-item>
@@ -46,8 +46,11 @@
     <ion-item-group>
         <ion-item-divider color="light">Thanh toán</ion-item-divider>
         <ion-item>
-            <ion-icon item-start name="card"></ion-icon>
-            <ion-label>Thẻ</ion-label>
+            <ion-label>Hình thức thanh toán</ion-label>
+            <ion-select [(ngModel)]="event.typePay" interface="action-sheet">
+                <ion-option value="1">Thẻ</ion-option>
+                <ion-option value="2">Tiền mặt</ion-option>
+            </ion-select>
         </ion-item>
     </ion-item-group>
 </ion-content>

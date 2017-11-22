@@ -31,6 +31,7 @@ import { StorageProvider} from '../providers/storage/storage';
 
 import { IonicStorageModule } from '@ionic/storage';
 import { MapJsProvider } from '../providers/map-js/map-js';
+import { RequestsProvider } from '../providers/requests/requests';
 export const firebaseConfig = {
   apiKey: "AIzaSyBhwRfLRKPd2FhSwIwGFet2VAMvWKcyhMg",
   authDomain: "iparking-8b618.firebaseapp.com",
@@ -81,6 +82,7 @@ firebase.initializeApp(firebaseConfig);
     HttpService,
     StorageProvider,
     MapJsProvider,
+    RequestsProvider,
   ]
 })
 export class AppModule {}

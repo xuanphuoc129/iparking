@@ -13,6 +13,7 @@ export class Parks{
     rate: number;
     isOpen : boolean;
     isValidate: boolean;
+    distance: string;
     constructor(opts?: any){
         this.parkID = "M00";
         this.parkName = "TNHH Lorem";
@@ -27,11 +28,14 @@ export class Parks{
         this.rate =  0.0;
         this.isOpen = false;
         this.isValidate = false;
+        this.distance = "0";
         if(opts){
             this.pair(opts);
         }
     }
-
+    setDistance(distance: string){
+        this.distance = distance;
+    }
     pair(opts : any){
         if(opts.parkID) this.parkID = opts.parkID;
         if(opts.parkName) this.parkName = opts.parkName;

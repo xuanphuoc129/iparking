@@ -27,7 +27,7 @@ export class MyApp {
     {
       icon: "list",
       name: "Danh sách dịch vụ đang chờ ",
-      component: ""
+      component: "ListRequestPage"
     },
     {icon: "car",name: "Thêm xe", component: "AddCarPage"},
     {

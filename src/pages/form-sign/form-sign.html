@@ -38,22 +38,22 @@
         <ion-item-divider color="light">Thời gian</ion-item-divider>
         <ion-item>
             <ion-label>Ngày bắt đầu</ion-label>
-            <ion-datetime displayFormat="MMM DD YYYY" [(ngModel)]="event.month"></ion-datetime>
+            <ion-datetime (ngModelChange)="comparegetHours()" displayFormat="MMM DD YYYY" [(ngModel)]="event.dateStart"></ion-datetime>
         </ion-item>
 
         <ion-item>
             <ion-label>Giờ bắt đầu</ion-label>
-            <ion-datetime displayFormat="h:mm A" pickerFormat="h mm A" [(ngModel)]="event.timeStarts"></ion-datetime>
+            <ion-datetime (ngModelChange)="comparegetHours()" displayFormat="h:mm A" pickerFormat="h mm A" [(ngModel)]="event.timeStarts"></ion-datetime>
         </ion-item>
 
         <ion-item>
             <ion-label>Ngày kết thúc</ion-label>
-            <ion-datetime displayFormat="MMM DD YYYY" [(ngModel)]="event.monthEnd"></ion-datetime>
+            <ion-datetime (ngModelChange)="comparegetHours()" displayFormat="MMM DD YYYY" [(ngModel)]="event.dateEnd"></ion-datetime>
         </ion-item>
 
         <ion-item>
             <ion-label>Giờ kết thúc</ion-label>
-            <ion-datetime displayFormat="h:mm A" pickerFormat="h mm A" [(ngModel)]="event.timeEnds"></ion-datetime>
+            <ion-datetime (ngModelChange)="comparegetHours()" displayFormat="h:mm A" pickerFormat="h mm A" [(ngModel)]="event.timeEnds"></ion-datetime>
         </ion-item>
 
     </ion-item-group>
@@ -62,11 +62,14 @@
         <ion-item-divider color="light">Thanh toán</ion-item-divider>
         <ion-item>
             <ion-icon item-start name="cart"></ion-icon>
-            <ion-label>200000VNĐ</ion-label>
+            <ion-label text-right>{{event.price}}VNĐ</ion-label>
         </ion-item>
         <ion-item>
-            <ion-icon item-start name="card"></ion-icon>
-            <ion-label>Thẻ</ion-label>
+            <ion-label>Hình thức thanh toán</ion-label>
+            <ion-select [(ngModel)]="event.typePay" interface="action-sheet">
+                <ion-option value="1">Thẻ</ion-option>
+                <ion-option value="2">Tiền mặt</ion-option>
+            </ion-select>
         </ion-item>
     </ion-item-group>
 </ion-content>

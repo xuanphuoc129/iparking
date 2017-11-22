@@ -1,0 +1,22 @@
+page-list-request {
+    ion-content.content {
+        background-color: #1B3951;
+    }
+    .toolbar-background-md {
+        text-align: center;
+        background-color: #059F9E;
+    }
+    .a-request {
+        width: calc(100% - 20px);
+        margin-left: 10px;
+        padding: 10px;
+        box-shadow: 1px 1px 4px #888888;
+        margin-bottom: 10px;
+        font-size: 4.2vw;
+        background: white;
+        border-radius: 5px;
+        .a-delete {
+            padding: 5px;
+        }
+    }
+}

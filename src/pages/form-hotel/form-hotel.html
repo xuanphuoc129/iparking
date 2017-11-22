@@ -26,26 +26,42 @@
         </ion-item>
     </ion-item-group>
     <ion-item-group>
-        <ion-item-divider color="light">Chọn xe</ion-item-divider>
-        <ion-item (click)="getCarsList()">
-            <ion-icon item-start name="car"></ion-icon>
-            <ion-label>{{carID}}</ion-label>
-        </ion-item>
-        <button ion-item (click)="addCar()">Thêm xe</button>
-    </ion-item-group>
-
-    <ion-item-group>
         <ion-item-divider color="light">Thời gian</ion-item-divider>
         <ion-item>
             <ion-label>Ngày bắt đầu</ion-label>
-            <ion-datetime displayFormat="MMM DD YYYY" [(ngModel)]="event.month"></ion-datetime>
+            <ion-datetime displayFormat="MMM DD YYYY" [(ngModel)]="event.timeStarts"></ion-datetime>
         </ion-item>
-
-
 
         <ion-item>
             <ion-label>Ngày kết thúc</ion-label>
-            <ion-datetime displayFormat="MMM DD YYYY" [(ngModel)]="event.monthEnd"></ion-datetime>
+            <ion-datetime displayFormat="MMM DD YYYY" [(ngModel)]="event.timeEnds"></ion-datetime>
+        </ion-item>
+
+
+    </ion-item-group>
+
+    <ion-item-group>
+        <ion-item-divider color="light">Phòng</ion-item-divider>
+        <ion-item (click)="showPrompt()">
+            <ion-label>Số lượng</ion-label>
+            <ion-label>{{event.numberRoom}}</ion-label>
+        </ion-item>
+
+        <ion-item>
+            <ion-label>Loại</ion-label>
+            <ion-select [(ngModel)]="event.typeRoom">
+                <ion-option value="250000">Đơn</ion-option>
+                <ion-option value="350000">Đôi</ion-option>
+            </ion-select>
+        </ion-item>
+
+
+        <ion-item>
+            <ion-label>Giá</ion-label>
+            <ion-select [(ngModel)]="event.typeRoom">
+                <ion-option value="250000">250000VNĐ</ion-option>
+                <ion-option value="350000">350000VNĐ</ion-option>
+            </ion-select>
         </ion-item>
 
 
@@ -55,13 +71,17 @@
         <ion-item-divider color="light">Thanh toán</ion-item-divider>
         <ion-item>
             <ion-icon item-start name="cart"></ion-icon>
-            <ion-label>200000VNĐ</ion-label>
+            <ion-label text-right>{{event.typeRoom*event.numberRoom}}VNĐ</ion-label>
         </ion-item>
         <ion-item>
-            <ion-icon item-start name="card"></ion-icon>
-            <ion-label>Thẻ</ion-label>
+            <ion-label>Hình thức thanh toán</ion-label>
+            <ion-select [(ngModel)]="event.typePay" interface="action-sheet">
+                <ion-option value="1">Thẻ</ion-option>
+                <ion-option value="2">Tiền mặt</ion-option>
+            </ion-select>
         </ion-item>
     </ion-item-group>
+
 </ion-content>
 <ion-footer>
     <button ion-button block class="a-background-button btn-bottom" (click)="sign()">Đăng ký</button>

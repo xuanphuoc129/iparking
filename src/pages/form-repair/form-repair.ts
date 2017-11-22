@@ -3,6 +3,8 @@ import { IonicPage, NavController, NavParams, AlertController, ModalController }
 import { Parks } from '../../providers/iparking/class/parks';
 import { Cars } from '../../providers/iparking/class/car';
 import { UsersProvider } from '../../providers/users/users';
+import { AppController } from '../../providers/app-controller';
+import { RequestsProvider } from '../../providers/requests/requests';
 
 /**
  * Generated class for the FormRepairPage page.
@@ -10,7 +12,16 @@ import { UsersProvider } from '../../providers/users/users';
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
  */
-
+export interface FormRepair{
+  userID: string;
+  carID: string;
+  repairID: string;
+  dateStarts: string;
+  timeStarts: string;
+  typePay : string;
+  OwnerID: string;
+  MH: string;
+}
 @IonicPage()
 @Component({
   selector: 'page-form-repair',
@@ -19,14 +30,30 @@ import { UsersProvider } from '../../providers/users/users';
 export class FormRepairPage {
   park: Parks;
   cars = new Array<Cars>();
+  event: FormRepair;
   constructor(
+    private requestModule :RequestsProvider,
+    
     private alertCtrl: AlertController,
     private modal: ModalController,
     private userModule: UsersProvider,
     public navCtrl: NavController, public navParams: NavParams) {
       this.park = new Parks();
       let date = new Date();
-      this.event.month = date.getFullYear()+'-'+(date.getMonth()+1)+'-'+date.getDate();
+      if(this.navParams.get('park')){
+        this.park = this.navParams.get('park');
+      }
+      this.event= {
+        dateStarts: '2017-11-21',
+        timeStarts: '00:00',
+        typePay: '1',
+        carID: this.carID,
+        userID: '',
+        repairID: 'repairID',
+        OwnerID: 'OID',
+        MH: this.park.parkID
+      }
+      this.event.dateStarts = date.getFullYear()+'-'+(date.getMonth()+1)+'-'+date.getDate();
       if(date.getHours()<10){
       this.event.timeStarts = '0'+date.getHours()+':'+date.getMinutes();
       }else{
@@ -38,12 +65,11 @@ export class FormRepairPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad FormRepairPage');
   }
-  public event = {
-    month: '2017-11-21',
-    timeStarts: '00:00',
-  }
   carID: string = "";
+  
+ 
   ionViewDidEnter() {
+    
     this.getCars();
   }
 
@@ -142,7 +168,17 @@ export class FormRepairPage {
         {
           text: 'OK',
           handler: () => {
-            this.navCtrl.pop();
+            AppController.getInstance().doShowLoading(9999999999);
+            this.event.carID = this.carID;
+            this.requestModule.requestRepair(this.event).then((res: any)=>{
+              if(res){
+                AppController.getInstance().doCloseLoading();
+                AppController.getInstance().doShowToast("Đăng ký thành công!",3000,"top");
+                this.navCtrl.pop();
+              }else{
+                AppController.getInstance().doShowToast("Không thể gửi yêu cầu tới nhà cung cấp dịch vụ",2000,"bottom");
+              }
+            })
           }
         }
 

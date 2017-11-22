@@ -4,6 +4,9 @@ import { Cars } from '../../providers/iparking/class/car';
 import { Parks } from '../../providers/iparking/class/parks';
 import { UsersProvider } from '../../providers/users/users';
 import { database } from 'firebase/app';
+import { RequestsProvider } from '../../providers/requests/requests';
+import { Alert } from 'ionic-angular/components/alert/alert';
+import { AppController } from '../../providers/app-controller';
 
 /**
  * Generated class for the FormWashPage page.
@@ -11,6 +14,17 @@ import { database } from 'firebase/app';
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
  */
+export interface FormWash{
+  userID: string;
+  carID: string;
+  washID: string;
+  timeStarts: string;
+  dateStarts: string;
+  typePay: string;
+  price: string;
+  OwnerID: string;
+  MH: string;
+}
 
 @IonicPage()
 @Component({
@@ -20,14 +34,30 @@ import { database } from 'firebase/app';
 export class FormWashPage {
   park: Parks;
   cars = new Array<Cars>();
+  event: FormWash;
   constructor(
+    private requestModule :RequestsProvider,
     private alertCtrl: AlertController,
     private modal: ModalController,
     private userModule: UsersProvider,
     public navCtrl: NavController, public navParams: NavParams) {
     this.park = new Parks();
     let date = new Date();
-    this.event.month = date.getFullYear()+'-'+(date.getMonth()+1)+'-'+date.getDate();
+    if(this.navParams.get('park')){
+      this.park = this.navParams.get('park');
+    }
+    this.event = {
+      dateStarts: '2017-11-21',
+      timeStarts: '00:00',
+      typePay: '1',
+      carID: this.carID,
+      price: '20000',
+      washID: 'wid',
+      userID: 'uid',
+      MH: this.park.parkID,
+      OwnerID: "OWnerID"
+    }
+    this.event.dateStarts = date.getFullYear()+'-'+(date.getMonth()+1)+'-'+date.getDate();
     if(date.getHours()<10){
     this.event.timeStarts = '0'+date.getHours()+':'+date.getMinutes();
     }else{
@@ -40,12 +70,11 @@ export class FormWashPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad FormWashPage');
   }
-  public event = {
-    month: '2017-11-21',
-    timeStarts: '00:00',
-  }
   carID: string = "";
+  
+ 
   ionViewDidEnter() {
+  
     this.getCars();
   }
 
@@ -144,7 +173,17 @@ export class FormWashPage {
         {
           text: 'OK',
           handler: () => {
-            this.navCtrl.pop();
+            AppController.getInstance().doShowLoading(9999999999);
+            this.event.carID = this.carID;
+            this.requestModule.requestWash(this.event).then((res: any)=>{
+              if(res){
+                AppController.getInstance().doCloseLoading();
+                AppController.getInstance().doShowToast("Đăng ký thành công!",3000,"top");
+                this.navCtrl.pop();
+              }else{
+                AppController.getInstance().doShowToast("Không thể gửi yêu cầu tới nhà cung cấp dịch vụ",2000,"bottom");
+              }
+            })
           }
         }
 

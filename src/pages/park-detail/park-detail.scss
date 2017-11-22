@@ -17,7 +17,6 @@ page-park-detail {
         color: #ffff1a!important;
     }
     .a-detail-container {
-        height: 50%;
         overflow: scroll;
     }
     .a-detail-listHeader {
@@ -55,19 +54,8 @@ page-park-detail {
         }
     }
     .a-btn-bottom {
-        position: absolute;
-        left: 10px;
-        right: 10px;
-        bottom: 10px;
-        filter: brightness(100%);
-        transform: scale(1);
-        transition: .2s;
-        padding: 10px;
-        span {
-            font-size: 5vw;
-            text-transform: uppercase;
-            color: white;
-        }
+        margin: 0;
+        padding: 0;
     }
     .a-btn-bottom:active {
         filter: brightness(120%);

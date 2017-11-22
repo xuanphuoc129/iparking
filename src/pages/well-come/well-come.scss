@@ -1,4 +1,7 @@
 page-well-come {
+    ion-content.content {
+        // background-color: #1B3951;
+    }
     .a-slide-container {
         height: 80%;
         width: 100%;
@@ -13,6 +16,7 @@ page-well-come {
         right: 20px;
         span {
             font-size: 8vw;
+            // color: white;
         }
     }
     .btn-bottom-container {
@@ -33,6 +37,7 @@ page-well-come {
             span {
                 text-transform: uppercase;
                 font-size: 4.5vw;
+                // color: white;
             }
         }
         .w-btn:active {

@@ -30,6 +30,9 @@ export class SignupServicePage {
   }
   carID: string = "";
   ionViewDidEnter() {
+    if(this.navParams.get('park')){
+      this.park = this.navParams.get('park');
+    }
     this.userModule.getCars().then((res: any)=>{
       if(res){
         this.cars = res;
@@ -131,17 +134,25 @@ export class SignupServicePage {
     alert.present();
   }
   GotoSignPark(){
-    this.navCtrl.push("FormSignPage");
+    this.navCtrl.push("FormSignPage",{
+      park :this.park
+    });
   }
 
   GotoSignWash(){
-    this.navCtrl.push("FormWashPage");
+    this.navCtrl.push("FormWashPage",{
+      park :this.park
+    });
   }
   GotoSignRepair(){
-    this.navCtrl.push("FormRepairPage");
+    this.navCtrl.push("FormRepairPage",{
+      park :this.park
+    });
   }
 
   GotoSignHotel(){
-    this.navCtrl.push("FormHotelPage");
+    this.navCtrl.push("FormHotelPage",{
+      park :this.park
+    });
   }
 }

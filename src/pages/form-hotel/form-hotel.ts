@@ -3,13 +3,27 @@ import { IonicPage, NavController, NavParams, AlertController, ModalController }
 import { Cars } from '../../providers/iparking/class/car';
 import { Parks } from '../../providers/iparking/class/parks';
 import { UsersProvider } from '../../providers/users/users';
-
+import firebase from 'firebase';
+import { DateTime } from 'ionic-angular/components/datetime/datetime';
+import { RequestsProvider } from '../../providers/requests/requests';
+import { AppController } from '../../providers/app-controller';
 /**
  * Generated class for the FormHotelPage page.
  *
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
  */
+export interface FormHotel{
+  userID: string;
+  hotelID: string;
+  timeStarts: string;
+  timeEnds: string;
+  numberRoom: string;
+  typeRoom: string;
+  typePay: string;
+  ownerID: string;
+  MH: string;
+}
 
 @IonicPage()
 @Component({
@@ -19,15 +33,32 @@ import { UsersProvider } from '../../providers/users/users';
 export class FormHotelPage {
   park: Parks;
   cars = new Array<Cars>();
+  event: FormHotel;
   constructor(
+    private requestModule :RequestsProvider,
+    
     private alertCtrl: AlertController,
     private modal: ModalController,
     private userModule: UsersProvider,
     public navCtrl: NavController, public navParams: NavParams) {
     this.park = new Parks();
     let date = new Date();
-    this.event.month = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
-    this.event.monthEnd = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
+    if(this.navParams.get('park')){
+      this.park = this.navParams.get('park');
+    }
+    this.event= {
+      userID: 'uid',
+      hotelID: 'HID',
+      numberRoom: '1',
+      typeRoom: '250000',
+      timeStarts: '2017-11-21',
+      timeEnds: '2017-11-21',
+      typePay: '1',
+      ownerID: 'OID',
+      MH: this.park.parkID
+    }
+    this.event.timeStarts = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
+    this.event.timeEnds = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
     
     console.log(this.event);
   }
@@ -35,15 +66,23 @@ export class FormHotelPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad FormHotelPage');
   }
-  public event = {
-    month: '2017-11-21',
-    monthEnd: '2017-11-21',
-  }
+  
   carID: string = "";
   ionViewDidEnter() {
+   
     this.getCars();
   }
 
+  compare2Date(a: Date, b: Date): number{
+    if(a.getDate() == b.getDate() && a.getMonth() == b.getMonth() && a.getFullYear()==b.getFullYear()){
+      return 2;
+    }
+    if(a<b){
+      return 1;
+    }else{
+      return 0;
+    }
+  }
   getCars() {
     this.userModule.getCars().then((res: any) => {
       if (res) {
@@ -101,11 +140,17 @@ export class FormHotelPage {
       handler: data => {
         this.carID = data;
       }
-    });
+    }); 
     alert.present();
   }
   sign() {
-    this.showConfirm();
+    let number = this.compare2Date(new Date(this.event.timeStarts), new Date(this.event.timeEnds));
+    
+    if(number > 0){
+      this.showConfirm();
+    }else{
+      alert("Ngày kết thúc phải lớn hơn hoặc bằng ngày bắt đầu");
+    }
   }
   showConfirm() {
     let confirm = this.alertCtrl.create({
@@ -139,7 +184,17 @@ export class FormHotelPage {
         {
           text: 'OK',
           handler: () => {
-            this.navCtrl.pop();
+            AppController.getInstance().doShowLoading(9999999999);
+            
+            this.requestModule.requestHotel(this.event).then((res: any)=>{
+              if(res){
+                AppController.getInstance().doCloseLoading();
+                AppController.getInstance().doShowToast("Đăng ký thành công!",3000,"top");
+                this.navCtrl.pop();
+              }else{
+                AppController.getInstance().doShowToast("Không thể gửi yêu cầu tới nhà cung cấp dịch vụ",2000,"bottom");
+              }
+            })
           }
         }
 
@@ -147,6 +202,61 @@ export class FormHotelPage {
     });
     alert.present();
   }
-
-
+  public AlertOptions = {
+    title: 'Số lượng phòng',
+    message: "Nhập số phòng bạn muốn đăng ký",
+    inputs: [
+      {
+        name: 'number',
+        placeholder: 'Number'
+      },
+    ],
+    buttons: [
+      {
+        text: 'Cancel',
+        handler: data => {
+          console.log('Cancel clicked');
+        }
+      },
+      {
+        text: 'Save',
+        handler: data => {
+          console.log('Saved clicked',data.number);
+          if(parseInt(data.number)>0){
+            this.event.numberRoom = data.number;
+          }
+        }
+      }
+    ]
+  }
+  showPrompt() {
+    let prompt = this.alertCtrl.create({
+      title: 'Số lượng phòng',
+      message: "Nhập số phòng bạn muốn đăng ký",
+      inputs: [
+        {
+          name: 'number',
+          placeholder: 'Number'
+        },
+      ],
+      buttons: [
+        {
+          text: 'Cancel',
+          handler: data => {
+            console.log('Cancel clicked');
+          }
+        },
+        {
+          text: 'Save',
+          handler: data => {
+            console.log('Saved clicked',data.number);
+            if(parseInt(data.number)>0){
+              this.event.numberRoom = data.number;
+            }
+          }
+        }
+      ]
+    });
+    prompt.present();
+  }
 }

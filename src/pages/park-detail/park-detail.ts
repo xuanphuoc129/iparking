@@ -90,7 +90,9 @@ export class ParkDetailPage {
   }
 
   goToSign() {
-    this.navCtrl.push("SignupServicePage");
+    this.navCtrl.push("SignupServicePage",{
+      park: this.park
+    });
   }
 
 }

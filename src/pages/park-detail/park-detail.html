@@ -20,6 +20,7 @@
 </ion-header>
 <ion-content>
     <div id="parkMapID"></div>
+
     <div class="a-detail-container">
         <ion-list style="margin-top: 5px">
             <ion-item *ngFor="let item of listItems" class="a-list-detail">
@@ -28,7 +29,9 @@
             </ion-item>
         </ion-list>
     </div>
-    <div class="a-background-button a-btn-bottom " text-center (click)="goToSign()">
-        <span>Đăng ký dịch vụ</span>
-    </div>
+
+
 </ion-content>
+<ion-footer>
+    <button ion-button block class="a-background-button a-btn-bottom" (click)="goToSign()">Đăng ký dịch vụ</button>
+</ion-footer>
